@@ -1,0 +1,79 @@
+#########################
+SETTINGS
+enemy_ability_list=[[30,10,4,20,20,1,20,20],[60,20,8,30,25,2,30,25],[100,40,12,40,30,3,40,30],[130,50,20,50,25,4,50,35],[320,60,32,60,40,5,60,40],[1000,70,48,70,45,6,70,45],[2000,80,64,80,50,7,80,50],[4000,90,80,100,55,8,90,55],[12000,100,96,120,60,9,100,60],[60000,120,125,150,70,10,120,70],[100000,200,150,200,200,"BOSS",200,200]]
+
+enemy_data＝[[1，"Skeleton","SKELETON"］,[2,"Green Slime","GREEN SLIME"］,[4,"Zombie","ZOMBIE"],[7,"Gargoyle","GARGOYLE"],[8,"Minotaur","MINOTAUR"],[9,"Water Holege","WATER HOLEGE"],[2,"Cyclops","CYCLOPS"],[3,"Winter Wolf","WINTER WOLF"],[4,"Hag","HAG"],[5,"Float Eye","FLOAT EYE"],[8,"Treant","TREANT"],[10,"Balrog","BALROG"],[9,"Greater Demon","GREAT DEMON"],[6,"Mad Taus","MAD TAUS"],[11,"Arch Demon Secpter","ARCH DEMON SECPTER"],[7,"Mad Taus Revenge", "MAD TAUS REVENGE"],[7,"Mad Taus Revenge2","MAD TAUS REVENGE2"],[4,"Hag","HAG"]]
+##########################  
+def MAX(baseHP,baseMP,baseATK,baseDEF,baseSPD.baseEXP,level):
+	if EXP>100:
+		level=2
+		baseHP=200
+		baseMP=20
+		baseATK=15
+		baseSPD=10
+		baseDEF=0.1
+	if EXP>300:
+		level=3
+		baseHP=300
+		baseMP=40
+		baseATK=20
+		baseSPD=15
+		baseDEF=0.15
+	if EXP>500:
+		level=4
+		baseHP=400
+		baseMP=60
+		baseATK=25
+		baseSPD=25
+		baseDEF=0.2
+	if EXP>750:
+		level=5
+		baseHP=500
+		baseMP=80
+		baseATK=35
+		baseSPD=40
+		baseDEF=0.25
+	if EXP>1000:
+		level=6
+		baseHP=600
+		baseMP=100
+		baseATK=50
+		baseSPD=60
+		baseDEF=0.3
+	if EXP>1300:
+		level=7
+		baseHP=700
+		baseMP=120
+		baseATK=70
+		baseSPD=80
+		baseDEF=0.35
+	if EXP>1600:
+		level=8
+		baseHP=800
+		baseMP=140
+		baseATK=90
+		baseSPD=100
+		baseDEF=0.4
+	if EXP>2000:
+		level=9
+		baseHP=900
+		baseMP=160
+		baseATK=120
+		baseSPD=125
+		baseDEF=0.45
+	if EXP>2500:
+		level=MAX
+		baseHP=1200
+		baseMP=200
+		baseATK=150
+		baseSPD=150
+		baseDEF=0.5
+
+#When I receive battle:
+  E_HP=enemy_ability[enemy_data[map][0]][0]
+  E_Attack Point=enemy_ability_list[enemy)data[map][0]][1]
+  E_Speed=[enemy_data[map][0]][2]
+  E_Level=[enemy_data[map][0]][5]
+  
+#When I receive Attack:
+  
