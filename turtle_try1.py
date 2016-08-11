@@ -1,11 +1,11 @@
-import turtle
+from turtle import *
 import time
 
 #windows settings
-screen = turtle.Screen()
-turtle.setup(width=480, height=360)
+screen = Screen()
+setup(width=480, height=360)
 screen.bgcolor("black")
-turtle.title("Simple RPG for CS10 final by group 7")
+title("Simple RPG for CS10 final by group 7")
 
 #define & import graphic files
 player_image = "systems/player.gif"
@@ -21,47 +21,43 @@ selection_frame3 = "systems/selection square3.gif"
 
 # these defs control the movement of our "turtle"
 def move_up():
-    turtle.seth(90)
-    turtle.forward(move_speed)
+    seth(90)
+    forward(move_speed)
 
 def move_down():
-    turtle.seth(270)
-    turtle.forward(move_speed)
+    seth(270)
+    forward(move_speed)
 
 def move_left():
-    turtle.seth(180)
-    turtle.forward(move_speed)
+    seth(180)
+    forward(move_speed)
 
 def move_right():
-    turtle.seth(0)
-    turtle.forward(move_speed)
+    seth(0)
+    forward(move_speed)
 
 #define the write function
 def write(string, size, color, x, y):
-    turtle.penup()
-    turtle.goto(x, y)
-    turtle.pendown()
-    turtle.pencolor(color)
-    turtle.write(string, font=('04b_21', size, "normal"))
-    turtle.penup()
+    penup()
+    goto(x, y)
+    pendown()
+    pencolor(color)
+    write(string, font=('04b_21', size, "normal"))
+    penup()
 
 #some function definition
 def shine():
     while shine == 0:
-        turtle.ht()
+        ht()
         time.sleep(0.5)
-        turtle.st()
+        st()
         time.sleep(0.5)
-    turtle.ht()
+    ht()
 
 
 
 #define selection square function
-def selection(column1, column2, height, width):
-    shine = 0
-    selection = 1
-    while selection != 0:
-        if
+
 
 
 
@@ -73,15 +69,15 @@ screen.addshape(selection_frame2)
 screen.addshape(selection_frame3)
 
 
-turtle.penup()
-turtle.speed(0)
-turtle.home()
+penup()
+speed(0)
+home()
 
 move_speed = 20
 turn_speed = 90
 start_point = (10, 10)
 
-turtle.goto(start_point)
+goto(start_point)
 
 # associate the defs from above with certain keyboard events
 screen.onkey(move_up, "Up")
@@ -94,10 +90,10 @@ screen.listen()
 
 
 #game start menu
-turtle.bgpic(start_screen)
-turtle.shape(selection_frame1)
-turtle.home()
-selection(1, 1, 50, 0)
+bgpic(start_screen)
+shape(selection_frame1)
+home()
+
 
 
 #start game
@@ -118,5 +114,5 @@ selection(1, 1, 50, 0)
 
 
 
-turtle.mainloop()
+mainloop()
 
