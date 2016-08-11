@@ -1,4 +1,5 @@
 from turtle import *
+from pygame import *
 import time
 
 #windows settings
@@ -19,6 +20,32 @@ selection_frame1 = "systems/selection square1.gif"
 selection_frame2 = "systems/selection square2.gif"
 selection_frame3 = "systems/selection square3.gif"
 
+#import map to dictionary map
+map = {}
+for i in range(1, 19):
+    map["map"+str(i)] = "maps/map_"+str(i)+".gif"
+
+#import monster image to dictionary monster
+monsters = {}
+monsters["Arch Demon Scepter"] = "monsters\Arch Demon Scepter.gif"
+monsters["Balrog"] = "monsters\Balrog.gif"
+monsters["Cyclops"] = "monsters\Cyclops.gif"
+monsters["Float Eye"] = "monsters\Float Eye.gif"
+monsters["Gargoyle"] = "monsters\Gargoyle.gif"
+monsters["Greater Demon Silver"] = "monsters\Greater Demon Silver.gif"
+monsters["Green Slime"] = "monsters\Green Slime.gif"
+monsters["Hag"] = "monsters\Hag.gif"
+monsters["Mad Taus Revenge"] = "monsters\Mad Taus Revenge.gif"
+monsters["Mad Taus Revenge2"] = "monsters\Mad Taus Revenge2.gif"
+monsters["Mad Taus"] = "monsters\Mad Taus.gif"
+monsters["Minotaur"] = "monsters\Minotaur.gif"
+monsters["Skeleton"] = "monsters\Skeleton.gif"
+monsters["Treant"] = "monsters\Treant.gif"
+monsters["Water Holger"] = "monsters\Water Holger.gif"
+monsters["Winter Wolf"] = "monsters\Winter Wolf.gif"
+monsters["Zombie"] = "monsters\Zombie.gif"
+
+
 # these defs control the movement of our "turtle"
 def move_up():
     seth(90)
@@ -36,8 +63,14 @@ def move_right():
     seth(0)
     forward(move_speed)
 
+def player_move(player_x, player_y):
+    goto(player_x * 20 - 250, 190 - player.y * 20)
+
+def position_report(x,y):
+    return ((pos()[0] + 250) / 20, (190-pos()[1] / 220))
+
 #define the write function
-def write(string, size, color, x, y):
+def print_string(string, size, color, x, y):
     penup()
     goto(x, y)
     pendown()
