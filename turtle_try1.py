@@ -48,26 +48,30 @@ monsters["Zombie"] = "monsters\Zombie.gif"
 
 # these defs control the movement of our "turtle"
 def move_up():
-    seth(90)
-    forward(move_speed)
+    if position_report()[1] > 2:
+        seth(90)
+        forward(move_speed)
 
 def move_down():
-    seth(270)
-    forward(move_speed)
+    if position_report()[1] < 17:
+        seth(270)
+        forward(move_speed)
 
 def move_left():
-    seth(180)
-    forward(move_speed)
+    if position_report()[0] > 2:
+        seth(180)
+        forward(move_speed)
 
 def move_right():
-    seth(0)
-    forward(move_speed)
+    if position_report()[0] < 23:
+        seth(0)
+        forward(move_speed)
 
 def player_move(player_x, player_y):
-    goto(player_x * 20 - 250, 190 - player.y * 20)
+    goto(int(player_x * 20 - 250), int(190 - player_y * 20))
 
-def position_report(x,y):
-    return ((pos()[0] + 250) / 20, (190-pos()[1] / 220))
+def position_report():
+    return (int((pos()[0] + 250) / 20), int((190-pos()[1]) / 20))
 
 #define the write function
 def print_string(string, size, color, x, y):
@@ -108,9 +112,9 @@ home()
 
 move_speed = 20
 turn_speed = 90
-start_point = (10, 10)
+start_point = (1, 1)
 
-goto(start_point)
+player_move(8, 10)
 
 # associate the defs from above with certain keyboard events
 screen.onkey(move_up, "Up")
@@ -123,9 +127,8 @@ screen.listen()
 
 
 #game start menu
-bgpic(start_screen)
-shape(selection_frame1)
-home()
+bgpic(map["map1"])
+shape(player_image)
 
 
 
