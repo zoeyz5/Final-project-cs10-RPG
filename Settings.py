@@ -1,21 +1,58 @@
 #########################
-enemy_ability_list = [[30,10,4,20,20,1,20,20], [60,20,8,30,25,2,30,25], [100,40,12,40,30,3,40,30],
-					  [130,50,20,50,25,4,50,35], [320,60,32,60,40,5,60,40], [1000,70,48,70,45,6,70,45],
-					  [2000,80,64,80,50,7,80,50], [4000,90,80,100,55,8,90,55], [12000,100,96,120,60,9,100,60],
-					  [60000,120,125,150,70,10,120,70],[100000,200,150,200,200,"BOSS",200,200]]
+class enemy():
+	def __init__(self, map, hp):
+		self.level = enemy_ability_list[map][5]
+		self.name = enemy_ability_list[map][3]
+		self.hp = hp
+		self.ATK = enemy_ability_list[map][1]
+		self.speed = enemy_ability_list[map][2]
+		self.max_hp = enemy_ability_list[map][0]
+		self.gold = enemy_ability_list[map][6]
+		self.exp = enemy_ability_list[map][7]
+		self.map = map
 
-enemy_data = [[1, "Skeleton", "SKELETON"], [2, "Green Slime", "GREEN SLIME"], [4, "Zombie", "ZOMBIE"],
-			  [7, "Gargoyle", "GARGOYLE"], [8, "Minotaur", "MINOTAUR"],[9,"Water Holege","WATER HOLEGE"],
-			  [2, "Cyclops","CYCLOPS"], [3,"Winter Wolf","WINTER WOLF"], [4,"Hag","HAG"], [5,"Float Eye","FLOAT EYE"],
-			  [8,"Treant","TREANT"], [10,"Balrog","BALROG"], [9,"Greater Demon","GREAT DEMON"],
-			  [6,"Mad Taus","MAD TAUS"], [11,"Arch Demon Secpter","ARCH DEMON SECPTER"],
-			  [7,"Mad Taus Revenge", "MAD TAUS REVENGE"], [7,"Mad Taus Revenge2","MAD TAUS REVENGE2"],[4,"Hag","HAG"]]
+	def enemy_attack(self, player):
 
-entrance_and_exit = [ [0,12,9,0], [0,14,9,9], [0,0,9,9], [0,13,9,9], [0,13,9,9], [0,13,9,0], [13,13,0,9],
+
+
+class player():
+	def __init__(self, level, hp, mp, RI, BI, exp, gold):
+		self.level = level
+		self.hp = hp
+		self.mp = mp
+		self.DEF = player_ability[level][4]
+		self.ATK = player_ability[level][2]
+		self.SPD = player_ability[level][3]
+		self.RI = item["heal potion"] = RI
+		self.BI = item["ether potion"] = BI
+		self.exp = exp
+		self.gold = gold
+
+	def attack(self, enemy):
+
+
+enemy_ability_list = [["hp", "atk", "speed", "name", "map", "level", "gold", "exp"], [30,10,4,"Skeleton",1,1,20,20],
+					  [60,20,8,"Green Slime",2,2,30,25], [130,50,20,"Zombie",3,4,50,35], [2000,80,64,"Gargoyle",4,7,80,50],
+					  [4000,90,80,"Minotaur",5,8,90,55], [12000,100,96,"Water Holege",6,9,100,60], [60,20,8,"Cyclops",7,2,30,25],
+					  [100,40,12,"Winter Wolf",8,3,40,30], [130,50,20,"Hag",9,4,50,35], [320,60,32,"Float Eye",10,5,60,40],
+					  [4000, 90, 80, "Treant", 11, 8, 90, 55], [60000,120,125,"Balrog",12,10,120,70],
+					  [12000,100,96,"Greater Demon",13,9,100,60],
+					  [1000,70,48,"Mad Taus",14,6,70,45], [100000,200,150,"Arch Demon Secpter",15,11,200,200],
+					  [2000,80,64,"Mad Taus Revenge",16,7,80,50], [2000,80,64,"Mad Taus Revenge2",17,7,80,50],
+					  [130, 50, 20, "Hag", 18, 4, 50, 35]]
+
+entrance_and_exit = [['up', 'down', 'left', 'right'], [0,12,9,0], [0,14,9,9], [0,0,9,9], [0,13,9,9], [0,13,9,9], [0,13,9,0], [13,13,0,9],
 					  [13,0,9,0], [12,13,0,0], [13,0,9,0], [13,0,0,10], [13,13,10,10],[13,0,10,0], [0,0,0,10],
 					  [13,0,0,0], [0,0,10,10],[0,0,0,0], [0,0,0,10]]
 
-player_ability =
+player_ability = (("max_hp", "max_mp", "ATK", "Speed", "DEF", "?", "exp"), (100, 10, 10, 5, 5, 10, 100), (200, 20, 15, 10, 10, 20, 200),
+				  (200, 40, 20, 15, 15, 30, 300),
+				  (300, 40, 20, 15, 15, 30, 300), (400, 60, 25, 25, 20, 20, 40, 400),
+				  (500, 80, 35, 40, 25, 50, 500), (600, 100, 50, 60, 30, 60, 600),
+				  (700, 150, 70, 80, 35, 70, 700), (800, 200, 90, 100, 40, 80, 800),
+				  (1200, 400, 150, 150, 50, 100, 1200))
+
+item = {"heal potion": 0, "ether potion": 0}
 
 ##########################
 def level_up(EXP, level):
@@ -83,11 +120,7 @@ def level_up(EXP, level):
 		baseSPD=150
 		baseDEF=0.5
 
-#When I receive battle:
-  E_HP=enemy_ability[enemy_data[map][0]][0]
-  E_Attack Point=enemy_ability_list[enemy)data[map][0]][1]
-  E_Speed=[enemy_data[map][0]][2]
-  E_Level=[enemy_data[map][0]][5]
+
   
 #When I receive Attack:
   
