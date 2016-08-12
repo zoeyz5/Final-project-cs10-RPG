@@ -1,6 +1,6 @@
 # Final-project
 We are buliding an RPG game 
-In this game, you have mainly these functions for adventuring:
+We did most part in snap! But for we try to implete the game to python(although only the map system(we made the python version a illustrated handbook,a player can first experience what is the game used for but he or she can't fight, but we did a lot of work) We also fixed some bugs for the Snap!).In this game, you have mainly these functions for adventuring:
 (However, there are some bugs caused by the delay of the turtle graphic so please don't press the buttom too frequently!!! Thank you~~
 
 1)	Battle
