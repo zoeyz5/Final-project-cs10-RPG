@@ -27,6 +27,7 @@ You can also load your progress in our game so you don’t need to start again n
 We use various lists and dictionaries to store our variables and take the adventages of the dictionary to speed up the program.
 We use list in the list to store more information, the items in the list of list will naturally form the index so they are very useful to represent the position and the items.
 For example, we put all the positions a player can reach in a map in a list so we can directly predicate whether a player can go there or not(the place one can go is represented by "0", and the place one can't go is represented by "1"
+
 2.	variables
 
 The basic ones are playerx and playery, all of our map systems are based on these two variables. 
@@ -34,6 +35,7 @@ we have different variables for the enemies and player, and each of them has dif
 the player's variables are global ones because we need to use they all the time.
 we end the script pf the enemies once their HP is lower or equals to 0, so we can continue our game.
 we also have some variables that not directly affect the battle system but helping items like gold. Player can use gold to buy the portions.
+
 3.  scripts
 
 Initially, We have many scripts in the program because there are many options of actions. We separate each scene to avoid making a mess. 
