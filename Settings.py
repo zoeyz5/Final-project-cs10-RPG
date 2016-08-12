@@ -1,16 +1,4 @@
-import random, time
-from turtle import *
-from . import turtle_try1
 
-#define the write function
-def print_string(string, size, color, x, y):
-    hd()
-    penup()
-    goto(x, y)
-    pendown()
-    pencolor(color)
-    write(string, font=('04b_21', size, "normal"))
-    penup()
 
 #########################
 class enemy():
@@ -64,6 +52,12 @@ enemy_ability_list = [["hp", "atk", "speed", "name", "map", "level", "gold", "ex
 entrance_and_exit = [['up', 'down', 'left', 'right'], [0,12,9,0], [0,14,9,9], [0,0,9,9], [0,13,9,9], [0,13,9,9], [0,13,9,0], [13,13,0,9],
 					  [13,0,9,0], [12,13,0,0], [13,0,9,0], [13,0,0,10], [13,13,10,10],[13,0,10,0], [0,0,0,10],
 					  [13,0,0,0], [0,0,10,10],[0,0,0,0], [0,0,0,10]]
+
+map_setting = [['up', 'down', 'left', 'right'], [0,7,0,2], [0,8,1,3],[0,0,2,4], [0,11,3,5], [1,9,0,8],
+			   [2,0,7,0],[7,10,0,0],[9,0,14,0],[4,0,0,12],[5,15,11,13],[6,0,12,0],[0,0,0,10],[12,0,0,0],
+			   [0,0,17,14], [0,0,16,0],[0,0,0,9]]
+
+
 
 player_ability = (("max_hp", "max_mp", "ATK", "Speed", "DEF", "?", "exp"), (100, 10, 10, 5, 5, 10, 100), (200, 20, 15, 10, 10, 20, 200),
 				  (200, 40, 20, 15, 15, 30, 300),

@@ -51,21 +51,25 @@ def move_up():
     if position_report()[1] > 2:
         seth(90)
         forward(move_speed)
+    print_string(str(position_report()[0])+","+str(position_report()[1]), 20, "white", 0,0)
 
 def move_down():
     if position_report()[1] < 17:
         seth(270)
         forward(move_speed)
+    print_string(str(position_report()[0]) + "," + str(position_report()[1]), 20, "white", 0, 0)
 
 def move_left():
     if position_report()[0] > 2:
         seth(180)
         forward(move_speed)
+    print_string(str(position_report()[0]) + "," + str(position_report()[1]), 20, "white", 0, 0)
 
 def move_right():
     if position_report()[0] < 23:
         seth(0)
         forward(move_speed)
+    print_string(str(position_report()[0]) + "," + str(position_report()[1]), 20, "white", 0, 0)
 
 def player_move(player_x, player_y):
     goto(int(player_x * 20 - 250), int(190 - player_y * 20))
@@ -75,12 +79,19 @@ def position_report():
 
 #define the write function
 def print_string(string, size, color, x, y):
+    clear()
+    stamp()
+    origin_x = pos()[0]
+    origin_y = pos()[1]
+    ht()
     penup()
     goto(x, y)
     pendown()
     pencolor(color)
     write(string, font=('04b_21', size, "normal"))
     penup()
+    goto(origin_x, origin_y)
+    st()
 
 #some function definition
 def shine():
