@@ -1,5 +1,4 @@
 from turtle import *
-from pygame import *
 import time, random
 
 #windows settings
@@ -8,7 +7,7 @@ setup(width=480, height=360)
 screen.bgcolor("black")
 title("Simple RPG for CS10 final by group 7")
 
-#########################
+#########################we haven't use these classes
 class enemy():
 	def __init__(self, map, hp):
 		self.level = enemy_ability_list[map][5]
@@ -44,9 +43,9 @@ class player():
 		enemy.hp -= attack_result
 		print_string(str(attack_result) + "DAMAGE", 20, "red", -100, 100)
 
+#########
 
-
-
+# we haven't implement the battle system on python
 enemy_ability_list = [["hp", "atk", "speed", "name", "map", "level", "gold", "exp"], [30,10,4,"Skeleton",1,1,20,20],
 					  [60,20,8,"Green Slime",2,2,30,25], [130,50,20,"Zombie",3,4,50,35], [2000,80,64,"Gargoyle",4,7,80,50],
 					  [4000,90,80,"Minotaur",5,8,90,55], [12000,100,96,"Water Holege",6,9,100,60], [60,20,8,"Cyclops",7,2,30,25],
@@ -57,7 +56,8 @@ enemy_ability_list = [["hp", "atk", "speed", "name", "map", "level", "gold", "ex
 					  [2000,80,64,"Mad Taus Revenge",16,7,80,50], [2000,80,64,"Mad Taus Revenge2",17,7,80,50],
 					  [130, 50, 20, "Hag", 18, 4, 50, 35]]
 
-entrance_and_exit = [['up', 'down', 'left', 'right'], [0,12,9,0], [0,14,9,9], [0,0,9,9], [0,13,9,9], [0,13,9,9],
+#map settings
+entrance_and_exit = [['up', 'down', 'left', 'right'], [0,12,0,9], [0,14,9,9], [0,0,9,9], [0,13,9,9], [0,13,9,9],
                      [0,13,9,0], [13,13,0,9], [13,0,9,0], [12,13,0,0], [13,0,9,0], [13,0,0,10], [13,13,10,10],
                      [13,0,10,0], [0,0,0,10],[13,0,0,0], [0,0,10,10],[0,0,0,0], [0,0,0,10]]
 
@@ -66,18 +66,17 @@ map_setting = [['up', 'down', 'left', 'right'], [0,7,0,2], [0,8,1,3],[0,0,2,4], 
 			   [0,0,17,14], [0,0,16,0],[0,0,0,9]]
 
 
-
+#we haven't use this
 player_ability = (("max_hp", "max_mp", "ATK", "Speed", "DEF", "?", "exp"), (100, 10, 10, 5, 5, 10, 100), (200, 20, 15, 10, 10, 20, 200),
 				  (200, 40, 20, 15, 15, 30, 300),
 				  (300, 40, 20, 15, 15, 30, 300), (400, 60, 25, 25, 20, 20, 40, 400),
 				  (500, 80, 35, 40, 25, 50, 500), (600, 100, 50, 60, 30, 60, 600),
 				  (700, 150, 70, 80, 35, 70, 700), (800, 200, 90, 100, 40, 80, 800),
 				  (1200, 400, 150, 150, 50, 100, 1200))
-
 item = {"heal potion": 0, "ether potion": 0}
 
 
-#define & import graphic files
+#define & import graphic files (we haven't use most of them)
 player_image = "systems/player.gif"
 start_screen = "systems/START SCREEN.gif"
 game_over_screen = "systems/GAME OVER SCREEN.gif"
@@ -115,66 +114,145 @@ monsters["Winter Wolf"] = "monsters\Winter Wolf.gif"
 monsters["Zombie"] = "monsters\Zombie.gif"
 
 
-# these defs control the movement of our "turtle"
+# these functions control the movement of our "turtle"
 def move_up():
-    global map, bgpic
+    global map, encounter
     if map_data[map][position_report()[1] - 1][position_report()[0]] == 0:
         seth(90)
         forward(move_speed)
     if position_report()[1] == 1:
         ht()
         map = map_setting[map][0]
-        bgpic = bgpic(map_resourses["map"+str(map)])
+        bgpic(map_resourses["map"+str(map)])
         player_move(entrance_and_exit[map][1], 17)
         st()
-    print_string(str(position_report()[0]) + " ," + str(position_report()[1]) + " MAP" + str(map), 20, "white", 0, 0)
+    if (position_report() == (12, 10) and map==9 ):
+        ht()
+        map = 18
+        bgpic(map_resourses["map18"])
+        player_move(22, 9)
+        st()
+    print_string(str(position_report()[0]) + " ," + str(position_report()[1]) + " MAP" + str(map), 20, "white", -100, 75)
+    st()
+    if encounter < 0:
+        clear()
+        bgpic(monsters[enemy_ability_list[map][3]])
+        print_string("THIS IS THE ENEMY OF THE MAP.", 12, "red", -150, 100)
+        ht()
+        time.sleep(2)
+        bgpic(map_resourses["map"+str(map)])
+        encounter = 12
+        clear()
+        st()
+    encounter -= 1
 
 def move_down():
-    global map, bgpic
+    global map, encounter
     if map_data[map][position_report()[1] + 1][position_report()[0]] == 0:
         seth(270)
         forward(move_speed)
     if position_report()[1] == 18:
         ht()
         map = map_setting[map][1]
-        bgpic = bgpic(map_resourses["map"+str(map)])
+        bgpic(map_resourses["map"+str(map)])
         player_move(entrance_and_exit[map][0], 2)
         st()
-    print_string(str(position_report()[0]) + " ," + str(position_report()[1]) + " MAP" + str(map), 20, "white", 0, 0)
+    print_string(str(position_report()[0]) + " ," + str(position_report()[1]) + " MAP" + str(map), 20, "white", -100, 75)
+    st()
+    if encounter < 0:
+        clear()
+        bgpic(monsters[enemy_ability_list[map][3]])
+        print_string("THIS IS THE ENEMY OF THE MAP.", 12, "red", -150, 100)
+        ht()
+        time.sleep(2)
+        bgpic(map_resourses["map"+str(map)])
+        encounter = 12
+        clear()
+        st()
+    encounter -= 1
 
 def move_left():
-    global map, bgpic
+    global map, encounter
     if map_data[map][position_report()[1]][position_report()[0] - 1] == 0:
         seth(180)
         forward(move_speed)
+    if (map == 14 and (position_report() == (7, 9) or position_report() == (7, 8))):
+        ht()
+        map = 16
+        bgpic(map_resourses["map16"])
+        player_move(23, 10)
+        st()
+    if (map == 17 and position_report() == (2, 10)):
+        ht()
+        map = 16
+        bgpic(map_resourses["map16"])
+        player_move(3, 10)
+        st()
+    if (map == 16 and position_report() == (2, 10)):
+        ht()
+        map = 17
+        bgpic(map_resourses["map17"])
+        player_move(3, 10)
+        st()
     if position_report()[0] == 1:
         ht()
         map = map_setting[map][2]
-        bgpic = bgpic(map_resourses["map"+str(map)])
+        bgpic(map_resourses["map"+str(map)])
         player_move(23, entrance_and_exit[map][3])
         st()
-    print_string(str(position_report()[0]) + " ," + str(position_report()[1]) + " MAP" + str(map), 20, "white", 0, 0)
+    print_string(str(position_report()[0]) + " ," + str(position_report()[1]) + " MAP" + str(map), 20, "white", -100, 75)
+    st()
+    if encounter < 0:
+        clear()
+        bgpic(monsters[enemy_ability_list[map][3]])
+        print_string("THIS IS THE ENEMY OF THE MAP.", 12, "red", -150, 100)
+        ht()
+        time.sleep(2)
+        bgpic(map_resourses["map"+str(map)])
+        encounter = 12
+        clear()
+        st()
+    encounter -= 1
+
 
 def move_right():
-    global map, bgpic
+    global map, encounter
     if map_data[map][position_report()[1]][position_report()[0] + 1] == 0:
         seth(0)
         forward(move_speed)
-    if position_report()[0] == 24:
+    if position_report()[0] == 24 and map == 18:
+        ht()
+        map = 9
+        bgpic(map_resourses["map9"])
+        player_move(12, 11)
+    elif position_report()[0] == 24:
         ht()
         map = map_setting[map][3]
-        bgpic = bgpic(map_resourses["map"+str(map)])
-        player_move(2, entrance_and_exit[map][2])
+        bgpic(map_resourses["map"+ str(map)])
+        player_move( 2, entrance_and_exit[map][2])
         st()
-    print_string(str(position_report()[0]) + " ," + str(position_report()[1]) + " MAP" + str(map), 20, "white", 0, 0)
+    print_string(str(position_report()[0]) + " ," + str(position_report()[1]) + " MAP" + str(map), 20, "white", -100, 75)
+    st()
+    if encounter < 0:
+        clear()
+        bgpic(monsters[enemy_ability_list[map][3]])
+        print_string("THIS IS THE ENEMY OF THE MAP.", 12, "red", -150, 100)
+        ht()
+        time.sleep(2)
+        bgpic(map_resourses["map"+str(map)])
+        encounter = 12
+        clear()
+        st()
+    encounter -= 1
 
+#move player to the relative position on the 18*24 (20*20 pixel) game board
 def player_move(player_x, player_y):
     goto(int(player_x * 20 - 250), int(190 - player_y * 20))
-
+#input is the coordinates of player turtle, out put is the position on a 18*24 (20*20 pixel) game board
 def position_report():
     return (int((pos()[0] + 250) / 20), int((190-pos()[1]) / 20))
 
-
+#map_data
 # white：1 black：0 mud：2 npc：3 tree：4 shop：5 sign:6 boss:9 village:7 treasure:8 castle:"c" downstairs:"d" upstairs:"u"
 map_data = [0, ["n", ["n", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                   ["n", 1, 0, 2, 2, 3, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1],
@@ -310,7 +388,7 @@ map_data = [0, ["n", ["n", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+               ["n", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -327,10 +405,10 @@ map_data = [0, ["n", ["n", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                ["n", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
                ["n", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "c", "c", "c", "c", 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-               ["n", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, "c", "c", "c", "c", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "c", "c", "c", "c", 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-               ["n", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, "c", "c", "c", "c", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 4, 4, "c", "c", "c", 4, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+               ["n", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, "c", "c", "c", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 4, 4, "c", 0, "c", 4, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+               ["n", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
                ["n", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -417,11 +495,11 @@ map_data = [0, ["n", ["n", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+               ["n", 1, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+               ["n", 1, 0, 0, 4, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+               ["n", 1, 0, 0, 4, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1],
+               ["n", 1, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
                ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -456,7 +534,7 @@ map_data = [0, ["n", ["n", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
                ["n", 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
                ["n", 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1],
-               ["n", "d", "d", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                ["n", 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1],
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
@@ -477,8 +555,8 @@ map_data = [0, ["n", ["n", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1],
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1, 1],
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 8, 1, 1],
-               ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 1, 1],
-               ["n", "u", "u", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 8, 8, 8, 8, 1, 1],
+               ["n", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 1, 1],
+               ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 8, 8, 8, 8, 1, 1],
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 1, 1],
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 8, 8, 1, 1],
                ["n", 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1, 1],
@@ -522,30 +600,9 @@ def print_string(string, size, color, x, y):
     write(string, font=('04b_21', size, "normal"))
     penup()
     goto(origin_x, origin_y)
-    st()
-
-#some function definition
-def shine():
-    while shine == 0:
-        ht()
-        time.sleep(0.5)
-        st()
-        time.sleep(0.5)
-    ht()
-
-
-
-#define selection square function
-
-
-
-
 
 #turtle shape settings
 screen.addshape(player_image)
-screen.addshape(selection_frame1)
-screen.addshape(selection_frame2)
-screen.addshape(selection_frame3)
 
 
 penup()
@@ -553,45 +610,21 @@ speed(0)
 home()
 
 move_speed = 20
-turn_speed = 90
-start_point = (1, 1)
 
 player_move(8, 10)
 
-# associate the defs from above with certain keyboard events
+# associate the keys from above with certain keyboard events
 screen.onkey(move_up, "Up")
 screen.onkey(move_down, "Down")
 screen.onkey(move_left, "Left")
 screen.onkey(move_right, "Right")
 screen.listen()
 
-#before start
-
-
-#game start menu
-map = 1
+#game start
+map = 11
 bgpic(map_resourses["map"+str(map)])
 shape(player_image)
-
-
-
-
-#start game
-
-
-
-#load
-
-
-
-#help
-
-
-
-#about
-
-
-
+encounter = 12
 
 
 mainloop()
