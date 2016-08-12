@@ -32,7 +32,7 @@ we have different variables for the enemies and player, and each of them has dif
 the player's variables are global ones because we need to use they all the time.
 we end the script pf the enemies once their HP is lower or equals to 0, so we can continu our game.
 we also have some variables that not directly affect the battle system but helping items like gold. Player can use gold to buy the portions.
-3.scripts
+3.  scripts
 Initially, We have many scripts in the program because there are many options of actions. We separate each scene to avoid making a mess. 
 Some of the scripts are used for settings and some of them are used for operation and some contains both. Some are more functional while some are more expressive force that helps the game to reach the aesthetics effect to accomplish an entire game.
 With a main script that is running for most of the time and contact with other scripts by something that is very similar to the broadcasting in Snap!, all the sprites are linked together and interact well with each other. With the same idea we call another fuction when the other is operating so we don't need to boardcast.
