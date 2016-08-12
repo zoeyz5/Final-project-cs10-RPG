@@ -1,6 +1,6 @@
 from turtle import *
 from pygame import *
-import time
+import time, random
 
 #windows settings
 screen = Screen()
