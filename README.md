@@ -1,6 +1,7 @@
 # Final-project
 We are buliding an RPG game 
 In this game, you have mainly these functions for adventuring:
+(However, there are some bugs caused by the delay of the turtle graphic so please don't press the buttom too frequently!!! Thank you~~
 
 1)	Battle
 We have already help you set the difficulty of this game to a good level, so don’t worry about the balance of the game.
